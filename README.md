@@ -13,11 +13,8 @@ Welcome to the **Admin Dashboard** – a separate, secure portal where administr
   - [Order History](#order-history)
   - [Dashboard Analytics](#dashboard-analytics)
   - [Customer Information](#customer-information)
-- [Customization](#customization)
-- [Deployment](#deployment)
-- [Contributing](#contributing)
-- [License](#license)
-- [Contact](#contact)
+- [Future Enhancements](#future-enhancements)
+- [Conclusion](#conclusion)
 
 ## Features
 
