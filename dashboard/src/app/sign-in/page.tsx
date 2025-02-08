@@ -26,7 +26,7 @@ export default function SignIn() {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <Card className="w-full max-w-md">
+      <Card className="w-full max-w-md rounded-none">
         <CardHeader>
           <CardTitle className="text-2xl font-bold text-center">Sign In</CardTitle>
         </CardHeader>
@@ -47,7 +47,7 @@ export default function SignIn() {
               required
             />
             {error && <p className="text-red-500 text-sm">{error}</p>}
-            <Button type="submit" className="w-full">
+            <Button type="submit" className="w-full bg-blue-500 hover:bg-blue-600 rounded-none">
               Sign In
             </Button>
           </form>

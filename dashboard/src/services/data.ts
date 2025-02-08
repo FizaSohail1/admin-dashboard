@@ -1,5 +1,4 @@
 "use server"
-
 import { client } from "@/sanity/lib/client"
 
 export interface ICard {
@@ -12,7 +11,7 @@ export interface ICard {
   price: number;
 }
 
-//-product Fetch Sanity
+//product Fetch Sanity
 export async function sanityFetch(query: string) {
   const res: ICard[] =  await client.fetch(`${query}{
           'image': image.asset->url,
@@ -43,10 +42,7 @@ async function uploadImageToSanity(imagePath: string) {
 }
 
 export interface IReturnSanityProduct {
-  _createdAt: string;
   _id: string;
-  _rev: string;
-  _type: string;
   _updatedAt: string;
   category: string;
   description: string;

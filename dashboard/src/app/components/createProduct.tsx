@@ -20,7 +20,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { ICard } from "@/services/sanityApi";
+import { ICard } from "@/services/data";
 import { useRef } from "react";
 
 interface EditProductDialogProps {

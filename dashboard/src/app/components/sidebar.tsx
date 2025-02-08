@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import { useState } from "react";
 import Link from "next/link";
 import { BarChart, Package, ShoppingCart, Users, Menu } from "lucide-react";
@@ -6,62 +6,48 @@ import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
 const sidebarLinks = [
-  {
-    title: "Dashboard",
-    icon: BarChart,
-    href: "/",
-    variant: "ghost" as const,
-  },
-  {
-    title: "Products",
-    icon: Package,
-    href: "/product-data",
-    variant: "ghost" as const,
-  },
-  {
-    title: "Orders",
-    icon: ShoppingCart,
-    href: "/orders",
-    variant: "ghost" as const,
-  },
-  {
-    title: "Customers",
-    icon: Users,
-    href: "/customers",
-    variant: "ghost" as const,
-  }
+  { title: "Dashboard", icon: <BarChart className="size-6" />, href: "/" },
+  { title: "Products", icon: <Package className="size-6" />, href: "/product-data" },
+  { title: "Orders", icon: <ShoppingCart className="size-6" />, href: "/orders" },
+  { title: "Customers", icon: <Users className="size-6" />, href: "/customers" }
 ];
 
 export function AdminSidebar() {
   const [isOpen, setIsOpen] = useState(true);
 
   return (
-    <div className="flex">
+    <div className="flex h-full"> 
       <aside
-        className={`bg-dark border-r transition-all duration-300 ${isOpen ? "w-64" : "w-16"}`}
+        className={`bg-gray-900 text-white h-fullshadow-lg transition-all duration-300 ${
+          isOpen ? "w-64" : "w-20"
+        } h-screen flex flex-col`}
       >
-        <ScrollArea className="h-[calc(100vh-4rem)]">
-          <div className="flex flex-col gap-4 p-4">
+        <div className="flex items-center justify-end p-4 border-b border-gray-700">
+          <Button
+            onClick={() => setIsOpen(!isOpen)}
+            className="p-2 rounded-md hover:bg-gray-700 transition"
+            variant="ghost"
+          >
+            <Menu className="size-6 text-white" />
+          </Button>
+        </div>
+        <ScrollArea className="flex-1 p-4">
+          <nav className="flex flex-col gap-2">
             {sidebarLinks.map((link) => (
-              <Button
+              <Link
                 key={link.title}
-                variant={link.variant}
-                asChild
-                className="justify-start gap-2"
+                href={link.href}
+                className="flex items-center gap-3 p-3 rounded-md transition hover:bg-gray-800"
               >
-                <Link href={link.href}>
-                  <link.icon className="size-5" />
-                  {isOpen && link.title}
-                </Link>
-              </Button>
+                {link.icon}
+                {isOpen && <span className="text-sm font-medium">{link.title}</span>}
+              </Link>
             ))}
-          </div>
+          </nav>
         </ScrollArea>
       </aside>
-
-      <Button onClick={() => setIsOpen(!isOpen)} className="m-2 p-2 bg-transparent" variant={"outline"}>
-        <Menu className="size-6 text-black" />
-      </Button>
     </div>
   );
 }
+
+
