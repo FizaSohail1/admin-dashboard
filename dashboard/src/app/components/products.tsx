@@ -12,8 +12,6 @@ import { ICard, productCreateSanity, productDeleteSanity, productPostSanity, san
 import { CreateProductDialog } from "./createProduct"
 
 
-
-
 export default function ProductsGrid() {
   const [editingProduct, setEditingProduct] = useState<ICard | null>()
 
@@ -80,7 +78,7 @@ export default function ProductsGrid() {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       <div className="flex items-center justify-between">
         <h1 className="text-3xl font-semibold">Products({productArray.length})</h1>
         <div className="flex items-center gap-4">
@@ -104,7 +102,7 @@ export default function ProductsGrid() {
       </div>
       <div className="flex items-center gap-4">
         <div className="relative flex-1">
-          <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+          <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
           <Input type="search" placeholder="Search products..." className="pl-8 max-w-sm" value={search} onChange={(e: any) => { setSearch(e.target.value) }} />
         </div>
 

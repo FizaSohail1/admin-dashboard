@@ -11,6 +11,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   const pathname = usePathname();
 
   const isHome = pathname.startsWith("/sign-in");
