@@ -4,7 +4,6 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { usePathname } from "next/navigation";
 import { AdminHeader } from "./components/header";
 import { AdminSidebar } from "./components/sidebar";
-import { useState } from "react";
 
 export default function RootLayout({
   children,

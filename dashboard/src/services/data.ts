@@ -43,7 +43,6 @@ async function uploadImageToSanity(imagePath: string) {
 
 export interface IReturnSanityProduct {
   _id: string;
-  _updatedAt: string;
   category: string;
   description: string;
   imagePath: {

@@ -32,7 +32,7 @@ interface EditProductDialogProps {
   categoryDropdown: string[];
 }
 
-export function EditProductDialog({
+export function EditProduct({
   product: initialProduct,
   open,
   onOpenChange,
@@ -89,8 +89,7 @@ export function EditProductDialog({
                 className="object-cover"
               />
             </div>
-            
-          
+
           </div>
           <div className="grid gap-4">
             <div className="grid grid-cols-2 gap-4">

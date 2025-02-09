@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Edit,Trash } from "lucide-react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { EditProductDialog } from "./editProduct";
+import { EditProduct } from "./editProduct";
 import {
   ICard,
   productCreateSanity,
@@ -114,7 +114,7 @@ export default function ProductsTable() {
 
       {/* Dialogs for Creating & Editing Products */}
       {editingProduct && (
-        <EditProductDialog
+        <EditProduct
           product={editingProduct}
           open={true}
           onOpenChange={(open: boolean) => !open && setEditingProduct(null)}
