@@ -108,6 +108,18 @@ export async function productCreateSanity(updatedProduct: ICard) {
   }
 }
 
+interface IOrderDetails {
+  userID:string,
+  userName: string;
+  totalAmount:number,
+  productLength:number,
+  orderDate:Date
+}
+
+export async function orderDeleteSanity(order:IOrderDetails){
+  const res = await client.delete(order.userID)
+  return res
+}
 
 
 

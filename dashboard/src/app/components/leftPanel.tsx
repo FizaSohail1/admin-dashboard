@@ -4,6 +4,8 @@ import { DollarSign, Package, ShoppingCart, Users } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts"
+import { client } from "@/sanity/lib/client"
+import { useEffect, useState } from "react"
 
 const salesData = [
   { name: "Jan", sales: 4000 },
@@ -14,36 +16,36 @@ const salesData = [
   { name: "Jun", sales: 5500 },
 ]
 
-const recentOrders = [
-  {
-    id: "1",
-    product: "Wireless Earbuds",
-    customer: "John Doe",
-    date: "2023-06-01",
-    status: "Delivered",
-    total: "$129.99",
-  },
-  {
-    id: "2",
-    product: "Smart Watch",
-    customer: "Jane Smith",
-    date: "2023-06-02",
-    status: "Processing",
-    total: "$199.99",
-  },
-  { id: "3", product: "Laptop", customer: "Bob Johnson", date: "2023-06-03", status: "Shipped", total: "$999.99" },
-  {
-    id: "4",
-    product: "Smartphone",
-    customer: "Alice Brown",
-    date: "2023-06-04",
-    status: "Processing",
-    total: "$799.99",
-  },
-  { id: "5", product: "Tablet", customer: "Charlie Davis", date: "2023-06-05", status: "Delivered", total: "$349.99" },
-]
+interface IOrderDetails {
+  userID:string,
+  userName: string;
+  totalAmount:number,
+  productLength:number,
+  orderDate:Date
+}
 
 export default function AdminDashboard() {
+
+   const [orders,setOrders] = useState<IOrderDetails[] | []>([]);
+    const [loading,setLoading] = useState(true);
+  
+    useEffect(() => {
+      const fetchOrderDetails = async () => {
+        try {
+          const orders = await client.fetch(`*[_type == "shipment" ]{userID,userName,productLength,orderDate,totalAmount}`);
+          setOrders(orders)
+  
+        } catch (error) {
+          
+          console.error("Error fetching order details:", error);
+        } finally {
+          setLoading(false)
+        }
+  
+      }
+      fetchOrderDetails();
+  
+    },[])
   return (
     <>
       <h1 className="mb-6 text-2xl font-semibold text-gray-800 dark:text-gray-200">Dashboard</h1>
@@ -55,8 +57,8 @@ export default function AdminDashboard() {
             <DollarSign className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">$45,231.89</div>
-            <p className="text-xs text-muted-foreground">+20.1% from last month</p>
+            <div className="text-2xl font-bold">$216000</div>
+            <p className="text-xs text-muted-foreground">from this month</p>
           </CardContent>
         </Card>
         <Card className="dark:bg-gray-800">
@@ -65,8 +67,8 @@ export default function AdminDashboard() {
             <ShoppingCart className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">+2350</div>
-            <p className="text-xs text-muted-foreground">+180.1% from last month</p>
+            <div className="text-2xl font-bold">2</div>
+            <p className="text-xs text-muted-foreground">from this month</p>
           </CardContent>
         </Card>
         <Card className="dark:bg-gray-800">
@@ -75,8 +77,7 @@ export default function AdminDashboard() {
             <Package className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">+12,234</div>
-            <p className="text-xs text-muted-foreground">+19% from last month</p>
+            <div className="text-2xl font-bold">+20</div>
           </CardContent>
         </Card>
         <Card className="dark:bg-gray-800">
@@ -85,8 +86,8 @@ export default function AdminDashboard() {
             <Users className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">+573</div>
-            <p className="text-xs text-muted-foreground">+201 since last hour</p>
+            <div className="text-2xl font-bold">+2</div>
+            <p className="text-xs text-muted-foreground">+2 since last hour</p>
           </CardContent>
         </Card>
       </div>
@@ -108,7 +109,7 @@ export default function AdminDashboard() {
             </ResponsiveContainer>
           </CardContent>
         </Card>
-        <Card className="dark:bg-gray-800">
+        <Card className="dark:bg-gray-800 h-fit">
           <CardHeader>
             <CardTitle>Recent Orders</CardTitle>
           </CardHeader>
@@ -117,20 +118,20 @@ export default function AdminDashboard() {
               <TableHeader>
                 <TableRow>
                   <TableHead>Order</TableHead>
-                  <TableHead>Product</TableHead>
-                  <TableHead>Date</TableHead>
+                  <TableHead>Product Length</TableHead>
+                  <TableHead>Customer</TableHead>
                   <TableHead>Status</TableHead>
                   <TableHead className="text-right">Total</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {recentOrders.map((order) => (
-                  <TableRow key={order.id}>
-                    <TableCell>{order.id}</TableCell>
-                    <TableCell>{order.product}</TableCell>
-                    <TableCell>{order.date}</TableCell>
-                    <TableCell>{order.status}</TableCell>
-                    <TableCell className="text-right">{order.total}</TableCell>
+                {orders.map((order,i) => (
+                  <TableRow key={i}>
+                    <TableCell>{order.userID}</TableCell>
+                    <TableCell>{order.productLength}</TableCell>
+                    <TableCell>{order.userName}</TableCell>
+                    <TableCell>Shipped</TableCell>
+                    <TableCell className="text-right">{order.totalAmount}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>
