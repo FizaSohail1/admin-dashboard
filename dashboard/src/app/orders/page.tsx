@@ -26,6 +26,9 @@ export default function OrdersPage() {
         const orders = await client.fetch(`*[_type == "shipment" ]{userID,userName,productLength,orderDate,totalAmount}`);
         setOrders(orders)
 
+        console.log('orders length',orders.length);
+        
+
       } catch (error) {
         
         console.error("Error fetching order details:", error);
@@ -60,7 +63,6 @@ export default function OrdersPage() {
                 <TableCell className="font-medium">{order.userID}</TableCell>
                 <TableCell className="text-center">{order.productLength}</TableCell>
                 <TableCell>{order.userName}</TableCell>
-                {/* <TableCell>{order.orderDate.toLocaleDateString()}</TableCell> */}
                 <TableCell className="text-green-500 font-semibold">Shipped</TableCell>
                 <TableCell className="text-right">{order.totalAmount}</TableCell>
                 <TableCell>

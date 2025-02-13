@@ -37,7 +37,7 @@ const UserCard = () => {
   return (
     <div>
       <h1 className="text-2xl font-bold">Customers</h1>
-      <div className="p-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-28">
+      <div className="p-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
         {users.map((userInfo, index) => (
           <Card key={index} className="w-80 shadow-lg rounded-lg">
             <CardHeader className="flex flex-col items-center">

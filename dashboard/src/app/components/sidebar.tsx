@@ -18,9 +18,9 @@ export function AdminSidebar() {
   return (
     <div className="flex h-full"> 
       <aside
-        className={`bg-gray-900 text-white h-fullshadow-lg transition-all duration-300 ${
+        className={`bg-gray-900 text-white min-h-full shadow-lg transition-all duration-300 ${
           isOpen ? "w-64" : "w-20"
-        } h-screen flex flex-col`}
+        } h-[1500px] md:h-[120vh] flex flex-col`}
       >
         <div className="flex items-center justify-end p-4 border-b border-gray-700">
           <Button

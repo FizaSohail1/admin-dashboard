@@ -46,41 +46,45 @@ export default function AdminDashboard() {
       fetchOrderDetails();
   
     },[])
+
+    const orderLength = orders.length;
+    const subtotal = orders.reduce((sum,order) => sum + order.totalAmount,0);
+   
   return (
     <>
       <h1 className="mb-6 text-2xl font-semibold text-gray-800 dark:text-gray-200">Dashboard</h1>
 
-      <div className="mb-6 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-        <Card className="dark:bg-gray-800">
+      <div className="mb-6 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+        <Card className="dark:bg-gray-800 w-[400px] md:w-full">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Total Revenue</CardTitle>
             <DollarSign className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">$216000</div>
+            <div className="text-2xl font-bold">${subtotal}</div>
             <p className="text-xs text-muted-foreground">from this month</p>
           </CardContent>
         </Card>
-        <Card className="dark:bg-gray-800">
+        <Card className="dark:bg-gray-800 w-[400px] md:w-full">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Orders</CardTitle>
             <ShoppingCart className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">2</div>
+            <div className="text-2xl font-bold w-[400px] md:w-full">{orderLength}</div>
             <p className="text-xs text-muted-foreground">from this month</p>
           </CardContent>
         </Card>
-        <Card className="dark:bg-gray-800">
+        <Card className="dark:bg-gray-800 w-[400px] md:w-full">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Products</CardTitle>
             <Package className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">+20</div>
+            <div className="text-2xl font-bold w-[400px] md:w-full">+20</div>
           </CardContent>
         </Card>
-        <Card className="dark:bg-gray-800">
+        <Card className="dark:bg-gray-800 w-[400px] md:w-full">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Active Now</CardTitle>
             <Users className="h-4 w-4 text-muted-foreground" />
@@ -93,7 +97,7 @@ export default function AdminDashboard() {
       </div>
 
       <div className="mb-6 grid gap-6 md:grid-cols-2">
-        <Card className="dark:bg-gray-800">
+        <Card className="dark:bg-gray-800 w-[400px] md:w-full">
           <CardHeader>
             <CardTitle>Sales Overview</CardTitle>
           </CardHeader>
@@ -109,7 +113,7 @@ export default function AdminDashboard() {
             </ResponsiveContainer>
           </CardContent>
         </Card>
-        <Card className="dark:bg-gray-800 h-fit">
+        <Card className="dark:bg-gray-800 h-fit w-[400px] md:w-full">
           <CardHeader>
             <CardTitle>Recent Orders</CardTitle>
           </CardHeader>
